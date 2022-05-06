@@ -8,7 +8,20 @@ export default function Auth() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const location = useLocation();
-    const history = useHistory();
+    const history = useHistory()
+    
+    const handleSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            await login(email, password);
+
+            const url = location.state.origin ? location.state.origin.pathname: '/';
+            history.replace(url);
+        } catch (error) {
+            setError(error.message);
+        }
+    }; 
+    
   return (
    
 
