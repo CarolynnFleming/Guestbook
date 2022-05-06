@@ -15,6 +15,11 @@ export const UserProvider = ({ children }) => {
     }
   };
   const logout = () => {
-      setUser({ email: null });
-  }
+    setUser({ email: null });
+  };
+  return(
+      <UserContext.Provider value={{ user, login, logout }}>
+          {children}
+      </UserContext.Provider>
+  )
 };
