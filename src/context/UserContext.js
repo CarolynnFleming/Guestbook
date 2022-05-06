@@ -18,17 +18,16 @@ export const UserProvider = ({ children }) => {
     setUser({ email: null });
   };
   return(
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
+    <UserContext.Provider value={{ user, login, logout }}>{children}
     </UserContext.Provider>
   );
 };
 
 export const useUser = () => {
-    const context = useContext(UserContext);
+  const context = useContext(UserContext);
 
-    if (context === undefined) {
-        throw new Error('useUser must be used within a UserProvider');
-    }
-    return context;
-}
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+  return context;
+};
