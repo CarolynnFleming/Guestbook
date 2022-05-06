@@ -16,9 +16,14 @@ export async function createEntry({ userId, content }) {
 }
 
 export async function updateEntryById(id, content) {
-    const request = await client
+  const request = await client
     .from('entries')
     .update({ content })
     .match({ id });
-    return parseData(request);
+  return parseData(request);
+}
+
+export async function deleteEntryById(id) {
+  const request = await client.from('entries').delete().match({ id });
+  return parseData(request);
 }
