@@ -1,17 +1,21 @@
 import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import { signUpUser } from '../../services/user';
+import { signUpUser, signInUser } from '../../services/user';
 
 export default function Auth() {
-  const { login } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const location = useLocation();
   const history = useHistory();
-  const [setPerson] = useState('');
-    
+  const [personIn, setPersonIn] = useState(false);
+  const { user, setUser } = useUser();
+
+  const useSignIn = () => {
+    setEmail('');
+    setPassword('');
+    setPersonIn((before) => !before);
+  };
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
