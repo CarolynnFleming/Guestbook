@@ -11,14 +11,14 @@ export default function App() {
   return(
     <UserProvider>
       <Header />
-    <Switch>
-      <Route exact path="/login">
-        <Auth />
-      </Route>
-      <PrivateRoute exact path="/">
-        <Entries />
-      </PrivateRoute>
-    </Switch>
+      <Switch>
+        <Route exact path="/login">
+          <Auth />
+        </Route>
+        <PrivateRoute exact path="/">
+          <Entries />
+        </PrivateRoute>
+      </Switch>
     </UserProvider>
   );
 }

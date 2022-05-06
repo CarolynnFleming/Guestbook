@@ -1,29 +1,12 @@
-import { createContext, useContext, useState } from 'react';
-import { getUser, signInUser, signUpUser } from '../services/user';
+import { createContext, useContext, useState, useMemo } from 'react';
+import { getUser } from '../services/user';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const currentUser = getUser();
-  const [user, setUser] = useState(currentUser || { email: null });
+  const [user, setUser] = useState({ email: null });
 
-  const signUp = async (email, password) => {
-    const newUser = await signUpUser({ email, password });
-
-    setUser(newUser);
-    
-  };
-
-  const login = async (email, password) => {
-    const officialUser = await signInUser({ email, password });
-
-    if (officialUser) {
-      setUser(officialUser);
-    }
-  };
-  const logout = () => {
-    setUser({ email: null });
-  };
+ const value = useMemo (() => ({ user, setUser }), [user.email]);
   return(
     <UserContext.Provider value={{ user, signUp, login, logout }}>{children}
     </UserContext.Provider>
