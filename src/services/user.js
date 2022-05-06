@@ -20,3 +20,7 @@ export async function signInUser({ email, password }) {
   if (error) throw error;
   return user;
 }
+
+export async function signOutUser() {
+    return client.auth.signOut();
+}
