@@ -1,3 +1,4 @@
+import { set } from 'msw/lib/types/context';
 import { useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
@@ -17,12 +18,15 @@ export default function Auth() {
     setPersonIn((before) => !before);
   };
   const handleSubmit = async (event) => {
+    setError('');
+
     try {
       event.preventDefault();
-      await login(email, password);
+      const doingIt = personIn ? await signUpUser({ email, password })
+        : await signInUser({ email, password });
 
-      const url = location.state.origin ? location.state.origin.pathname : '/';
-      history.replace(url);
+      setUser({ email: doingIt.email });
+      history.replace('/');
     } catch (error) {
       setError(error.message);
     }
