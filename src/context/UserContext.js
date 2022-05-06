@@ -5,7 +5,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const currentUser = getUser();
-  const [user, setUser] = userState(currentUser || { email: null });
+  const [user, setUser] = useState(currentUser || { email: null });
 
   const login = async (email, password) => {
     const authenticatedUser = await signInUser({ email, password });
@@ -18,8 +18,17 @@ export const UserProvider = ({ children }) => {
     setUser({ email: null });
   };
   return(
-      <UserContext.Provider value={{ user, login, logout }}>
-          {children}
-      </UserContext.Provider>
-  )
+    <UserContext.Provider value={{ user, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
+
+export const useUser = () => {
+    const context = useContext(UserContext);
+
+    if (context === undefined) {
+        throw new Error('useUser must be used within a UserProvider');
+    }
+    return context;
+}
