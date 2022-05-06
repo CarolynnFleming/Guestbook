@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import Header from './components/Header/Header';
 import PrivateRoute from './components/PrivateRoute.js/PrivateRoute';
 import Auth from './views/Auth/Auth';
 import Home from './views/Home/Home';
@@ -9,13 +10,13 @@ import Entries from './views/Users/Entries';
 export default function App() {
   return(
     <Switch>
-      <Route path="/login">
+      <Route exact path="/login">
         <Auth />
       </Route>
-      <PrivateRoute path="/entries">
+      <PrivateRoute exact path="/entries">
         <Entries />
       </PrivateRoute>
-      <Route path="/">
+      <Route exact path="/">
         <Home />
       </Route>
     </Switch>

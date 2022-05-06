@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { getUser, signInUser } from '../services/user';
+import { getUser, signInUser, signUpUser } from '../services/user';
 
 export const UserContext = createContext();
 
@@ -7,18 +7,25 @@ export const UserProvider = ({ children }) => {
   const currentUser = getUser();
   const [user, setUser] = useState(currentUser || { email: null });
 
-  const login = async (email, password) => {
-    const authenticatedUser = await signInUser({ email, password });
+  const signUp = async (email, password) => {
+    const newUser = await signUpUser({ email, password });
 
-    if (authenticatedUser) {
-      setUser(authenticatedUser);
+    setUser(newUser);
+    
+  };
+
+  const login = async (email, password) => {
+    const officialUser = await signInUser({ email, password });
+
+    if (officialUser) {
+      setUser(officialUser);
     }
   };
   const logout = () => {
     setUser({ email: null });
   };
   return(
-    <UserContext.Provider value={{ user, login, logout }}>{children}
+    <UserContext.Provider value={{ user, signUp, login, logout }}>{children}
     </UserContext.Provider>
   );
 };
