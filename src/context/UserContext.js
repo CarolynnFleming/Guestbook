@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({ email: null });
 
-  const value = useMemo (() => ({ user, setUser }), [user.email]);
+  const value = useMemo (() => ({ user, setUser }), [user.id, user.email]);
 
   useEffect(() => {
     const currentUser = getUser();
