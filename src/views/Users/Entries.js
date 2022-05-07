@@ -4,7 +4,15 @@ import { useUser } from '../../context/UserContext';
 import { getEntries } from '../../services/entires'; 
 
 export default function Entries() {
-    const 
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useUser();
+
+  const fetchLogs = () => {
+    getEntries()
+      .then(setLogs)
+      .finally(() => setLoading(false));
+  };
   return (
     <div>Entries</div>
   );
