@@ -1,4 +1,3 @@
-import { set } from 'msw/lib/types/context';
 import { useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
@@ -31,30 +30,55 @@ export default function Auth() {
       setError(error.message);
     }
   }; 
-
-  async function handleSignUp() {
-    const user = await signUpUser(email, password);
-    setPerson(user);
-  }
+  if (user.email) return <Redirect to="/" />;
 
   return (
     <>
-      <h1>Welcome to Guest Book!</h1>
+      <div>
+        <h2>
+          {personIn ? 'Sign Up' : 'Welcome Back Sign In !'}
+        </h2>
+        <p>
+            Or <a href="#" onClick={useSignIn}>
+            {' '}
+            { setPersonIn ? 'Sing In' : 'Make an Account!'}
+          </a>
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input type="email" 
-          vaule={email} 
-          onChange={(event) => setEmail(event.target.value)} 
-          placeholder="email"/>
-        <label htmlFor="password">Password</label>
-        <input type="password" 
-          vaule={password} 
-          onChange={(event) => setPassword(event.target.value)} 
-          placeholder="password"/>
-        <button type="submit" aria-label="Sign In">Sign In</button>
-        <button type="submit" onClick={handleSignUp}>Sign Up</button>
-        <p>{error}</p>
+        <input type="hidden" name="alaways" value="true" />
+        <div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input type="email" 
+              id="email"
+              name="email"
+              autoComplete="email"
+              required
+              vaule={email} 
+              onChange={(event) => setEmail(event.target.value)} 
+              placeholder="Email Address"/>
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input type="password" 
+              id="password"
+              name="password"
+              autoComplete="password"
+              required
+              vaule={password} 
+              onChange={(event) => setPassword(event.target.value)} 
+              placeholder="Password"/>
+          </div>
+          <div>
+            <button type="submit">
+              {personIn ? 'Make an Account!' : 'Sign In'}
+            </button>
+            <p>{error}</p>
+          </div>
+        </div>
       </form>
+    
     </>
   );
 }
