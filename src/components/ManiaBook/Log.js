@@ -1,13 +1,13 @@
 export default function Log({ author, description, date }) {
   return (
-      <>
-    <div>
+    <>
+      <div>
         <p>{description}</p>
-    </div>
-    <div>
+      </div>
+      <div>
         <p>{author}</p>
         <p>on{new Date(date).toLocaleString('en-US')}</p>
-    </div>
+      </div>
     </>
-  )
+  );
 }
