@@ -3,18 +3,27 @@ import { useUser } from '../../context/UserContext';
 import { createEntry } from '../../services/entries';
 
 export default function LogForm({ addLog }) {
-  const [content, setContent] = useState('');
+  const [description, setDescription] = useState('');
   const { user } = useUser();
 
   const  log = async (event) => {
     event.preventDefault();
-    const book = await createEntry({ userId: user.id, content });
+    const book = await createEntry({ userId: user.id, description });
     addLog(book);
-    setContent('');
+    setDescription('');
   };
 
 
   return (
-    <div>LogForm</div>
+    <div>
+      <form onSubmit={log}>
+        <textarea
+          required
+          value={description}
+          onChange={({ event }) => setDescription(event.target.value)} />
+        <button aria-label="add log"
+          type="submit">Submit Log</button>
+      </form>
+    </div>
   );
 }

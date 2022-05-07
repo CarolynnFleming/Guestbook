@@ -4,6 +4,7 @@ import { useUser } from '../../context/UserContext';
 import { getEntries } from '../../services/entires'; 
 
 export default function Entries() {
+    const 
   return (
     <div>Entries</div>
   );
