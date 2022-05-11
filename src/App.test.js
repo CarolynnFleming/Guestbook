@@ -4,7 +4,7 @@ import { MemoryRouter  } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import App from './App';
 import Entries from './views/Users/Entries';
-
+  
 test('should render a list of entries and suppot adding a new entry',
   async () => {
     render(
