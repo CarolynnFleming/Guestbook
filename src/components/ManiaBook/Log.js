@@ -1,8 +1,8 @@
-export default function Log({ author, description, date }) {
+export default function Log({ author, content, date }) {
   return (
     <>
       <div>
-        <p>{description}</p>
+        <p>{content}</p>
       </div>
       <div>
         <p>{author}</p>

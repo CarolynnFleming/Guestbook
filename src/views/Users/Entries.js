@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Log from '../../components/ManiaBook/Log';
 import LogForm from '../../components/ManiaBook/LogForm';
 import { useUser } from '../../context/UserContext';
-import { getEntries } from '../../services/entires'; 
+import { getEntries } from '../../services/entries'; 
 
 export default function Entries() {
   const [logs, setLogs] = useState([]);
@@ -28,11 +28,11 @@ export default function Entries() {
           <h1>Past Logs</h1>
           <ul>
             {logs.length ? (
-              logs.map(({ id, description, created_at }) => {
+              logs.map(({ id, content, created_at }) => {
                 return(
                   <li key={id}>
                     <Log
-                      description={description}
+                      content={content}
                       author={user.email}
                       date={created_at}/>
                   </li>

@@ -18,4 +18,4 @@ jobs:
         CI: true
         SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
         SUPABASE_API_URL: ${{ secrets.SUPABASE_API_URL }}
-        
+
