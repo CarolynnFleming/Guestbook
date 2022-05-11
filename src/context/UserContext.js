@@ -4,7 +4,7 @@ import { getUser } from '../services/user';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ email: null });
+  const [user, setUser] = useState({ id: null, email: null });
 
   const value = useMemo (() => ({ user, setUser }), [user.id, user.email]);
 
